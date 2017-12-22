@@ -1,0 +1,16 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: ping
+    yum:
+      name: git
+      state: present
+  - name: build jenkins job through ansible
+    uri:
+      url: "http://54.152.209.209:8080/job/myjob/build?token=myjob"
+      method: GET
+      user: anand
+      password: kumar
+      force_basic_auth: yes
+      status_code: 201
